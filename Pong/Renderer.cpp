@@ -50,7 +50,7 @@ static void draw_line_pix(int x1, int y1, int x2, int y2, u32 colour)
 			x = x2; y = y2; xe = x1;
 		}
 
-		if (y > 0 && y <= render_state.height && x > 0 && x <= render_state.width) {
+		if (y > 0 && y < render_state.height && x > 0 && x < render_state.width) {
 			pixel = (u32*)render_state.memory + (int)x + y * render_state.width;
 			*pixel = colour;
 		}
@@ -65,7 +65,7 @@ static void draw_line_pix(int x1, int y1, int x2, int y2, u32 colour)
 				if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) y = y + 1; else y = y - 1;
 				px = px + 2 * (dy1 - dx1);
 			}
-			if (y > 0 && y <= render_state.height && x > 0 && x <= render_state.width) {
+			if (y > 0 && y < render_state.height && x > 0 && x < render_state.width) {
 				pixel = (u32*)render_state.memory + (int)x + y * render_state.width;
 				*pixel = colour;
 			}
@@ -82,7 +82,7 @@ static void draw_line_pix(int x1, int y1, int x2, int y2, u32 colour)
 			x = x2; y = y2; ye = y1;
 		}
 
-		if (y > 0 && y <= render_state.height && x > 0 && x <= render_state.width) {
+		if (y > 0 && y < render_state.height && x > 0 && x < render_state.width) {
 			pixel = (u32*)render_state.memory + (int)x + y * render_state.width;
 			*pixel = colour;
 		}
@@ -97,7 +97,7 @@ static void draw_line_pix(int x1, int y1, int x2, int y2, u32 colour)
 				if ((dx < 0 && dy < 0) || (dx > 0 && dy > 0)) x = x + 1; else x = x - 1;
 				py = py + 2 * (dx1 - dy1);
 			}
-			if (y > 0 && y <= render_state.height && x > 0 && x <= render_state.width) {
+			if (y > 0 && y < render_state.height && x > 0 && x < render_state.width) {
 				pixel = (u32*)render_state.memory + (int)x + y * render_state.width;
 				*pixel = colour;
 			}
@@ -125,17 +125,11 @@ static void draw_rect(float x, float y, float half_size_x, float half_size_y, u3
 
 static void draw_line(float x0, float y0, float x1, float y1, u32 colour)
 {
-	x0 *= render_state.height * 0.01;
-	y0 *= render_state.height * 0.01;
+	x0 = (x0 / 1000) * render_state.width;
+	y0 = (y0 / 500) * render_state.height;
 
-	x0 += render_state.width / 2;
-	y0 += render_state.height / 2;
-
-	x1 *= render_state.height * 0.01;
-	y1 *= render_state.height * 0.01;
-
-	x1 += render_state.width / 2;
-	y1 += render_state.height / 2;
+	x1 = (x1 / 1000) * render_state.width;
+	y1 = (y1 / 500) * render_state.height;
 
 	draw_line_pix(x0, y0, x1, y1, colour);
 }

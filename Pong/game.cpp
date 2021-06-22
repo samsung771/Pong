@@ -51,8 +51,8 @@ static void update(Input* input, float dt)
 	draw_number(score[0], -5, 42, 1.5, 0xffffff);
 	draw_number(score[1], 5, 42, 1.5, 0xffffff);
 
-	draw_line_pix(-1, -1, 300, 1000, 0xFFFFFF);
-
+	draw_line(10, 10, 300, 500, 0xFFFFFF);
+	
 	draw_rect(0, 42, 1, 6, 0xf0f0ff);
 
 	if (is_down(BUTTON_UP)) player1C.acceleration[1] += 1000;

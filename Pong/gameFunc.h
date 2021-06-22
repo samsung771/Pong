@@ -1,6 +1,6 @@
 #include <vector>
 #pragma once
-
+ 
 #ifndef GAME_FUNC
 #define GAME_FUNC
 class Rect

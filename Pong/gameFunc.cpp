@@ -1,6 +1,6 @@
 #include <vector>
 
-class Rect
+class Rect 
 {
 private:
 	//static std::vector<Rect*> objList;
